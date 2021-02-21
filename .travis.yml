@@ -1,0 +1,17 @@
+language: python
+python:
+  - "3.8"
+install:
+    - pip install -r requirements.txt
+    - pip install pyyaml
+    - pip install coverage
+    - pip install coveralls
+# command to run tests
+script:
+  - coverage run --omit '/home/travis/virtualenv/python3.8.7/lib/python3.8/site-packages/_virtualenv.py' -m unittest discover tests && coverage report -m
+
+branches:
+  only:
+    - main
+after_success:
+  coveralls
