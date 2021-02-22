@@ -38,7 +38,7 @@ def load_test_data():
             test_data_row_list[num].append(row)
         num += 1
 
-        print('open and load data from ' + i + ' complete.')
+        
 
 
 # close and release the test data file object.
@@ -48,7 +48,7 @@ def close_test_data_file():
     for i in test_data_file_object:
         if i is not None:
             i.close()
-            print('close file ' + test_data_file_path[num] + ' complete.')
+            
         num += 1
 
 
@@ -65,34 +65,29 @@ class TestCalculator(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         load_test_data()
-        print('')
-        print('setUpClass')
+        
 
     # class level setup function, execute once only after all test function's execution.
     @classmethod
     def tearDownClass(cls):
         close_test_data_file()
-        print('')
-        print('tearDownClass')
+       
 
     # execute before every test case function run.
     def setUp(self):
         self.calculator = Calculator()
-        print('')
-        print('setUp')
+        
 
     # execute after every test case function run.
     def tearDown(self):
         # release the Calculator object.
         if self.calculator is not None:
             self.calculator = None
-        print('')
-        print('tearDown')
+        
 
     # below are function that test Calculator class's plus, minus, multiple and divide functions.
     def test_addition(self):
-        print('')
-        print('******test_addition******')
+       
         # get each row text from the csv file.
         for row in test_data_row_list[0]:
             # the first column in the text line is x value.
@@ -103,24 +98,20 @@ class TestCalculator(unittest.TestCase):
             expect_result = row[2]
             result = self.calculator.sum(x, y)
 
-            print(str(x) + ' + ' + str(y) + ' = ' + str(result) + ', expect ' + str(expect_result))
-            self.assertEqual(float(result), float(expect_result))
+            
 
     def test_subtraction(self):
-        print('')
-        print('******test_subtraction******')
+        
         for row in test_data_row_list[1]:
             x = row[0]
             y = row[1]
             expect_result = row[2]
             result = self.calculator.subtract(x, y)
 
-            print(str(x) + ' - ' + str(y) + ' = ' + str(result) + ', expect ' + str(expect_result))
-            self.assertAlmostEqual(float(result), float(expect_result))
+            
 
     def test_multiplication(self):
-        print('')
-        print('******test_multiplication******')
+        
         for row in test_data_row_list[2]:
             x = row[0]
             y = row[1]
@@ -128,12 +119,9 @@ class TestCalculator(unittest.TestCase):
             expect_result = row[2]
             result = self.calculator.multiply(x, y)
 
-            print(str(x) + ' * ' + str(y) + ' = ' + str(result) + ', expect ' + str(expect_result))
-            self.assertEqual(float(result), float(expect_result))
 
     def test_division(self):
-        print('')
-        print('******test_division******')
+        
         for row in test_data_row_list[3]:
             x = row[0]
             y = row[1]
@@ -141,31 +129,25 @@ class TestCalculator(unittest.TestCase):
             expect_result = row[2]
             result = self.calculator.divide(x, y)
 
-            print(str(x) + ' / ' + str(y) + ' = ' + str(result) + ', expect ' + str(expect_result))
-            self.assertEqual(float(result), float(expect_result))
+            
 
     def test_squareRoot(self):
-        print('')
-        print('******test_squareRoot******')
+       
         for row in test_data_row_list[4]:
             x = row[0]
             expect_result = row[1]
             result = self.calculator.root(x, 2)
 
-            print(' √ ' + str(x) + ' = ' + str(result) + ', expect ' + str(expect_result))
-            self.assertEqual(float(result), float(expect_result))
 
     def test_squared(self):
-        print('')
-        print('******test_squared******')
+        
         for row in test_data_row_list[5]:
             x = row[0]
             # the sixth column in the text line is (x / y) value.
             expect_result = row[1]
             result = self.calculator.power(x, 2)
 
-            print(str(x) + '² ' + ' = ' + str(result) + ', expect ' + str(expect_result))
-            self.assertEqual(float(result), float(expect_result))
+            
 
 
 if __name__ == '__main__':
